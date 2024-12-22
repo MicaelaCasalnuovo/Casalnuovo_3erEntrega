@@ -1,11 +1,187 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
-</head>
-<body style="background-color: blue;">
-    
-</body>
-</html>
+{% extends "App/base.html" %}
+{% load static  %}
+{% block main  %}
+<section id="productos" class="menu-cart scroll-reveal">
+    <div class="container">
+        <h1 class="header-txt">Productos</h1>
+        <div class="divider">
+            <?xml version="1.0" encoding="utf-8"?>
+            <!-- SVG Dividers go here -->
+        </div>
+        <!--.divider-->
+
+        <div class="tabs-content" data-tabs-content="example-tabs">
+            <div class="tabs-panel is-active" id="panel1">
+                <div class="menu-content">
+                    <div class="menu-section">
+                        <table>
+                            <tr>
+                                <td><span>TARTA DE VERDURAS ASADAS</span></td>
+                                <td><span>$12</span></td>
+                            </tr>
+                            <tr>
+                                <td>masa crujiente rellena de una mezcla de verduras asadas como calabacín, berenjena, tomate, cebolla y pimientos, con queso de cabra o ricotta</td>
+                            </tr>
+                            <tr>
+                                <td><span>ENSALADA MEDITERRÁNEA</span></td>
+                                <td><span>$10</span></td>
+                            </tr>
+                            <tr>
+                                <td>pepino, tomate, aceitunas, cebolla roja, pimientos, albahaca y aderezo de aceite de oliva</td>
+                            </tr>
+                            <tr>
+                                <td><span>FALAFEL CON HUMMUS Y ENSALADA DE TAHINI</span></td>
+                                <td><span>$14</span></td>
+                            </tr>
+                            <tr>
+                                <td>bolitas de garbanzo fritas, acompañadas de hummus cremoso y ensalada fresca de pepino, tomate y lechuga con aderezo de tahini</td>
+                            </tr>
+                            <tr>
+                                <td><span>TARTA DE TOMATE Y PESTO</span></td>
+                                <td><span>$13</span></td>
+                            </tr>
+                            <tr>
+                                <td>masa quebrada rellena con tomate fresco, pesto y queso mozzarella derretido</td>
+                            </tr>
+                            <tr>
+                                <td><span>ENSALADA DE QUINOA Y AGUACATE</span></td>
+                                <td><span>$12</span></td>
+                            </tr>
+                            <tr>
+                                <td>quinoa cocida con aguacate, pepino, zanahoria rallada, espinacas y un toque de limón y aceite de oliva</td>
+                            </tr>
+                            <tr>
+                                <td><span>SOUPA DE CALABAZA Y JENGIBRE</span></td>
+                                <td><span>$9</span></td>
+                            </tr>
+                            <tr>
+                                <td>sopa suave y cremosa de calabaza asada con un toque de jengibre, acompañada de pan integral</td>
+                            </tr>
+                            <tr>
+                                <td><span>BERENJENAS A LA PARMESANA</span></td>
+                                <td><span>$15</span></td>
+                            </tr>
+                            <tr>
+                                <td>capas de berenjena empanada, salsa de tomate, mozzarella y parmesano, horneadas hasta quedar doradas</td>
+                            </tr>
+                            <tr>
+                                <td><span>TACOS VEGETARIANOS CON VERDURAS</span></td>
+                                <td><span>$14</span></td>
+                            </tr>
+                            <tr>
+                                <td>tortillas de maíz rellenas de verduras asadas como calabacín, pimientos, cebolla y un toque de guacamole y salsa</td>
+                            </tr>
+
+                            <!-- Nuevos productos agregados -->
+                            <tr>
+                                <td><span>PASTA AL PESTO CON TOMATES SECOS</span></td>
+                                <td><span>$16</span></td>
+                            </tr>
+                            <tr>
+                                <td>pasta fresca acompañada de salsa pesto, tomates secos y piñones tostados</td>
+                            </tr>
+                            <tr>
+                                <td><span>RISOTTO DE ESPÁRRAGOS Y LIMÓN</span></td>
+                                <td><span>$18</span></td>
+                            </tr>
+                            <tr>
+                                <td>risotto cremoso con espárragos frescos, limón y un toque de parmesano</td>
+                            </tr>
+                            <tr>
+                                <td><span>HUMMUS DE REMOLACHA</span></td>
+                                <td><span>$8</span></td>
+                            </tr>
+                            <tr>
+                                <td>hummus cremoso con un toque de remolacha, acompañado de pan pita tostado</td>
+                            </tr>
+                            <tr>
+                                <td><span>BURGER VEGETARIANA DE LENTEJAS</span></td>
+                                <td><span>$13</span></td>
+                            </tr>
+                            <tr>
+                                <td>hamburguesa hecha de lentejas, zanahorias y especias, acompañada de ensalada fresca</td>
+                            </tr>
+                            <tr>
+                                <td><span>LASAGNA VEGETARIANA</span></td>
+                                <td><span>$17</span></td>
+                            </tr>
+                            <tr>
+                                <td>capas de pasta rellenas de espinacas, ricotta y tomate, con salsa bechamel</td>
+                            </tr>
+                            <tr>
+                                <td><span>SOPA DE LENTEJAS</span></td>
+                                <td><span>$11</span></td>
+                            </tr>
+                            <tr>
+                                <td>sopa espesa y nutritiva de lentejas con zanahorias y apio</td>
+                            </tr>
+
+                            <!-- Productos adicionales -->
+                            <tr>
+                                <td><span>ENSALADA DE AGUACATE Y MANGO</span></td>
+                                <td><span>$12</span></td>
+                            </tr>
+                            <tr>
+                                <td>ensalada fresca con aguacate, mango, espinacas y aderezo de limón</td>
+                            </tr>
+                            <tr>
+                                <td><span>CREMA DE ESPINACAS</span></td>
+                                <td><span>$9</span></td>
+                            </tr>
+                            <tr>
+                                <td>crema suave de espinacas con un toque de crema de leche</td>
+                            </tr>
+                            <tr>
+                                <td><span>GELATO DE FRAMBUESA</span></td>
+                                <td><span>$7</span></td>
+                            </tr>
+                            <tr>
+                                <td>helado casero de frambuesa con un toque de limón</td>
+                            </tr>
+                            <tr>
+                                <td><span>PASTEL DE LIMÓN Y ALMENDRA</span></td>
+                                <td><span>$8</span></td>
+                            </tr>
+                            <tr>
+                                <td>pastel suave de limón con almendras, decorado con un glaseado ligero</td>
+                            </tr>
+                            <tr>
+                                <td><span>BURGER DE QUINOA Y CHÍA</span></td>
+                                <td><span>$14</span></td>
+                            </tr>
+                            <tr>
+                                <td>hamburguesa de quinoa y chía con vegetales frescos y mayonesa vegana</td>
+                            </tr>
+                            <tr>
+                                <td><span>PAN DE AJO CON QUESO</span></td>
+                                <td><span>$6</span></td>
+                            </tr>
+                            <tr>
+                                <td>pan de ajo tostado con queso mozzarella derretido</td>
+                            </tr>
+                            <tr>
+                                <td><span>ENSALADA DE LENTEJAS Y ZANAHORIA</span></td>
+                                <td><span>$11</span></td>
+                            </tr>
+                            <tr>
+                                <td>ensalada de lentejas con zanahorias ralladas, cebolla morada y aderezo de aceite de oliva</td>
+                            </tr>
+                            <tr>
+                                <td><span>PASTA CON TOMATE Y ALBAHACA</span></td>
+                                <td><span>$15</span></td>
+                            </tr>
+                            <tr>
+                                <td>pasta fresca con salsa de tomate natural, albahaca fresca y un toque de aceite de oliva</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock main  %}

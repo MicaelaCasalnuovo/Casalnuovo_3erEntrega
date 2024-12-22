@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "App/base.html" %}
+{% load static %}
+{% block main %}
+
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compras</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenida</title>
 </head>
-<body style="background-color: blue;">
-    
+<body>
+  <section id="bienvenida" class="bienvenida-section">
+    <div class="container">
+      <h2 class="header-txt">¡Bienvenido! Gracias por elegirnos.</h2>
+      <p class="bienvenida-text">Nos sentimos muy agradecidos de que hayas elegido nuestro servicio. Tu confianza es muy importante para nosotros, y estamos comprometidos a ofrecerte una excelente experiencia cada vez que nos elijas.</p>
+      <p class="bienvenida-text">En esta sección podrás ver tus compras anteriores y realizar nuevas compras con facilidad. ¡Explora y disfruta de todo lo que tenemos para ofrecerte!</p>
+    </div>
+  </section>
 </body>
 </html>
+
+{% endblock main %}

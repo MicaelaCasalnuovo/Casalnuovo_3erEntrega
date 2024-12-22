@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reseñas</title>
-</head>
-<body style="background-color: blue;">
-    
-</body>
-</html>
+{% extends "App/base.html" %}
+{% load static  %}
+{% block main  %}
+
+<section id="reseñas" class="reviews-section">
+    <div class="container">
+        <h2 class="header-txt">¡Nos encantaría conocer tu opinión!</h2>
+        <p class="reviews-text">Tu experiencia es muy importante para nosotros. Valoramos cada uno de tus comentarios, ya que nos ayudan a mejorar y ofrecerte un mejor servicio. Agradecemos sinceramente el tiempo que dedicas para dejarnos tus reseñas. ¡Tu opinión cuenta y nos motiva a seguir creciendo!</p>
+        <p class="reviews-text">Si tienes alguna sugerencia o algo que quieras compartir con nosotros, no dudes en hacerlo. Nos encanta saber qué piensas y cómo podemos seguir mejorando.</p>
+        <p class="reviews-text">¡Gracias por elegirnos y por formar parte de nuestra comunidad!</p>
+        <!-- Aquí podrás agregar tu formulario en la siguiente sección -->
+    </div>
+</section>
+
+
+{% endblock main  %}

@@ -15,7 +15,7 @@ def productos(request):
     return render(request, "App/productos.html")
 
 def compra(request):
-    return render(request, "App/compras.html")
+    return render(request, "App/compra.html")
 
 def resenas(request):
     return render(request, "App/resenas.html")

@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "App/base.html" %}
+{% load static %}
+{% block main %}
+
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenida</title>
 </head>
-<body style="background-color: blue;">
-    
+<body>
+  <section id="bienvenida" class="bienvenida-section">
+    <div class="container">
+      <h2 class="header-txt">¡Bienvenido! Estamos felices de que vuelvas a elegirnos.</h2>
+      <p class="bienvenida-text">Tu apoyo y preferencia significan mucho para nosotros. Nos llena de alegría saber que elegiste nuevamente nuestro servicio. Queremos que disfrutes cada momento con nosotros y que tu experiencia sea siempre memorable.</p>
+      <p class="bienvenida-text">Gracias por confiar en nosotros. ¡Estamos aquí para brindarte lo mejor!</p>
+    </div>
+  </section>
 </body>
 </html>
+
+{% endblock main %}
