@@ -6,16 +6,16 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def inicio(request):
-    return HttpResponse("Vista inicio")
+    return render(request, "App/inicio.html")
 
 def clientes(request):
-    return HttpResponse("Vista clientes")
+    return render(request, "App/clientes.html")
 
 def productos(request):
-    return HttpResponse("Vista productos")
+    return render(request, "App/productos.html")
 
 def compra(request):
-    return HttpResponse("Vista compra")
+    return render(request, "App/compras.html")
 
 def resenas(request):
-    return HttpResponse("Vista reseñas")
+    return render(request, "App/resenas.html")
