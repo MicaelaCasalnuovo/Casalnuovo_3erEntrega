@@ -28,11 +28,14 @@
 
                         <nav id="main-nav" data-animate="menu-in menu-out">
                             <ul class="main-navigation">
-                                <li><a class="m-active" href="#" data-text="Inicio">Inicio</a></li>
-                                <li><a class="m-anim" href="#specials-grid" data-text="Clientes">clientes</a></li>
-                                <li><a class="m-anim" href="#about-us" data-text="productos">productos</a></li>
-                                <li><a class="m-anim" href="#main-menu" data-text="Compras">compras</a></li>
-                                <li><a class="m-anim" href="#contact-us" data-text="reseñas">reseñas</a></li>
+                                <li><a class="m-active" href="{% url 'inicio' %}" data-text="Inicio">Inicio</a></li>
+                                <li><a class="m-anim" href="{% url 'clientes' %}" data-text="Clientes">Clientes</a></li>
+                                <li><a class="m-anim" href="{% url 'productos' %}" data-text="Productos">Productos</a></li>
+                                <li><a class="m-anim" href="{% url 'compra' %}" data-text="Compras">Compras</a></li>
+                                <li><a class="m-anim" href="{% url 'resenas' %}" data-text="Reseñas">Reseñas</a></li>
+                            </ul>
+                        </nav>
+                        
                             </ul>
                         </nav>
                     </div>
@@ -327,7 +330,7 @@
                 <!--.social-icons-->
             </div>
             <!--.footer-content-->
-            <p class="copy-info">Copyright 2017 © by Anna Dadej</p>
+            <p class="copy-info">Copyright 2024 © by MICAELA CASALNUOVOP</p>
         </div>
         <!--.container-->
     </footer>
