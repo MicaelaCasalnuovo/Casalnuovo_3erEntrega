@@ -36,3 +36,9 @@ class ModeloReseña(models.Model):
     cliente = models.ForeignKey(ModeloCliente, on_delete=models.CASCADE, related_name="reseñas")  # Relación con Cliente
     producto = models.ForeignKey(ModeloProducto, on_delete=models.CASCADE, related_name="reseñas")  # Relación con Producto
     comentario = models.TextField()
+
+class SolicitudProductoFueraStock(models.Model):
+    producto = models.CharField(max_length=255)  # Nombre del producto solicitado
+    descripcion = models.TextField()  # Descripción opcional sobre el por qué lo buscan
+    cliente = models.ForeignKey(ModeloCliente, on_delete=models.CASCADE)  # Relación con el cliente que hace la solicitud
+    fecha_solicitud = models.DateTimeField(auto_now_add=True) 

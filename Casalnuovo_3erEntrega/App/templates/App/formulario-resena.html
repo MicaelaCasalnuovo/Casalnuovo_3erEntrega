@@ -1,0 +1,44 @@
+{% extends "App/base.html" %}
+{% load static %}
+
+{% block main %}
+
+    <h1>Deja una reseña</h1>
+
+    <!-- Formulario de reseña -->
+    <form method="POST">
+        {% csrf_token %}
+        
+        <!-- Campo Cliente -->
+        <div>
+            <label for="{{ form.cliente.id_for_label }}">Cliente:</label>
+            {{ form.cliente }}
+            {% if form.cliente.errors %}
+                <div class="errors">{{ form.cliente.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Campo Producto -->
+        <div>
+            <label for="{{ form.producto.id_for_label }}">Producto:</label>
+            {{ form.producto }}
+            {% if form.producto.errors %}
+                <div class="errors">{{ form.producto.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Campo Comentario -->
+        <div>
+            <label for="{{ form.comentario.id_for_label }}">Comentario:</label>
+            {{ form.comentario }}
+            {% if form.comentario.errors %}
+                <div class="errors">{{ form.comentario.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit">Enviar Reseña</button>
+    </form>
+
+    <br>
+    <a h
+{% endblock main %}

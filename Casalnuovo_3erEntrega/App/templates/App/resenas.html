@@ -1,6 +1,6 @@
 {% extends "App/base.html" %}
-{% load static  %}
-{% block main  %}
+{% load static %}
+{% block main %}
 
 <section id="reseñas" class="reviews-section">
     <div class="container">
@@ -8,9 +8,26 @@
         <p class="reviews-text">Tu experiencia es muy importante para nosotros. Valoramos cada uno de tus comentarios, ya que nos ayudan a mejorar y ofrecerte un mejor servicio. Agradecemos sinceramente el tiempo que dedicas para dejarnos tus reseñas. ¡Tu opinión cuenta y nos motiva a seguir creciendo!</p>
         <p class="reviews-text">Si tienes alguna sugerencia o algo que quieras compartir con nosotros, no dudes en hacerlo. Nos encanta saber qué piensas y cómo podemos seguir mejorando.</p>
         <p class="reviews-text">¡Gracias por elegirnos y por formar parte de nuestra comunidad!</p>
-        <!-- Aquí podrás agregar tu formulario en la siguiente sección -->
+
+        <!-- Mostrar las reseñas existentes -->
+        <div class="reviews-list">
+            {% for reseña in reseñas %}
+                <div class="reseña">
+                    <p><strong>Cliente:</strong> {{ reseña.cliente.nombre }}</p>
+                    <p><strong>Producto:</strong> {{ reseña.producto.nombre }}</p>
+                    <p><strong>Comentario:</strong> {{ reseña.comentario }}</p>
+                    <hr>
+                </div>
+            {% empty %}
+                <p>No hay reseñas disponibles.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Botón para redirigir al formulario de reseñas -->
+        <div class="add-review-btn">
+            <a href="{% url 'dejar_resena' %}" class="btn">Dejar una reseña</a>
+        </div>
     </div>
 </section>
 
-
-{% endblock main  %}
+{% endblock main %} 

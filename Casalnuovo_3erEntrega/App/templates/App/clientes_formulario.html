@@ -1,0 +1,60 @@
+{% extends "App/base.html" %}
+{% load static %}
+{% block main %}
+
+    <h1>Formulario de Cliente</h1>
+
+    <!-- Formulario para crear o editar un cliente -->
+    <form method="post">
+        {% csrf_token %} <!-- Protección contra CSRF -->
+
+        <!-- Mostrar los campos del formulario -->
+        <div>
+            <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
+            {{ form.nombre }}
+            {% if form.nombre.errors %}
+                <div class="errors">{{ form.nombre.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.apellido.id_for_label }}">Apellido:</label>
+            {{ form.apellido }}
+            {% if form.apellido.errors %}
+                <div class="errors">{{ form.apellido.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.dni.id_for_label }}">DNI:</label>
+            {{ form.dni }}
+            {% if form.dni.errors %}
+                <div class="errors">{{ form.dni.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.direccion.id_for_label }}">Dirección:</label>
+            {{ form.direccion }}
+            {% if form.direccion.errors %}
+                <div class="errors">{{ form.direccion.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.celular.id_for_label }}">Celular:</label>
+            {{ form.celular }}
+            {% if form.celular.errors %}
+                <div class="errors">{{ form.celular.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Botón para enviar el formulario -->
+        <button type="submit">Guardar Cliente</button>
+    </form>
+
+    <br>
+    <!-- Enlace para volver al inicio -->
+    <a href="{% url 'inicio' %}">Volver al inicio</a>
+
+{% endblock main %}
