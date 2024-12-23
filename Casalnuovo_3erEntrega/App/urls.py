@@ -12,8 +12,9 @@ urlpatterns = [
 forms_api = [
     path('formulario-cliente/', views.clientes_formulario, name='formulario_cliente'),
     path('formulario-resena/', views.formulario_resena, name='dejar_resena'),
-    path('formulario-compra/', views.formulario_compra, name='formulario_compra'),
+    path('formulario-compras/', views.formulario_compra, name='formulario_compra'),
     path('formulario-prodsinstock/', views.formulario_producto_fuera_stock, name='formulario_prodsinstock'),
+    path('buscar-cliente/', views.buscar_cliente, name='buscar_cliente'),
 ]
 
 # Añadiendo las rutas de los formularios al URL

@@ -13,9 +13,9 @@ class ModeloCliente(models.Model):
 
 # Modelo Producto
 class ModeloProducto(models.Model):
-    sku = models.CharField(max_length=50, unique=True)  # SKU único
+    sku = models.CharField(max_length=50, unique=True)  
     descripcion = models.TextField()
-    stock = models.PositiveIntegerField()  # Cantidad de stock
+    stock = models.PositiveIntegerField()  
     precio = models.DecimalField(max_digits=10, decimal_places=2) 
 
     def __str__(self):
@@ -40,5 +40,5 @@ class ModeloReseña(models.Model):
 class SolicitudProductoFueraStock(models.Model):
     producto = models.CharField(max_length=255)  # Nombre del producto solicitado
     descripcion = models.TextField()  # Descripción opcional sobre el por qué lo buscan
-    cliente = models.ForeignKey(ModeloCliente, on_delete=models.CASCADE)  # Relación con el cliente que hace la solicitud
+    cliente = models.ForeignKey(ModeloCliente, on_delete=models.CASCADE)  
     fecha_solicitud = models.DateTimeField(auto_now_add=True) 

@@ -30,11 +30,10 @@ def clientes_formulario(request):
         form = ModeloClienteForm(request.POST)
         
         if form.is_valid():
-            # Guardar los datos del formulario en la base de datos
+            # Guardar los datos 
             form.save()
 
-            # Redirigir a una página de éxito o donde prefieras
-            return redirect('inicio')  # Aquí puedes poner la URL que desees
+            return redirect('inicio') 
 
     else:
         form = ModeloClienteForm()
@@ -53,19 +52,18 @@ def formulario_resena(request):
     if request.method == 'POST':
         form = ReseñaForm(request.POST)
         if form.is_valid():
-            form.save()  # Guarda la reseña
+            form.save() 
             return redirect('resenas')  # Redirige a la página de reseñas
 
     else:
         form = ReseñaForm()
 
-    reseñas = ModeloReseña.objects.all()  # Obtenemos todas las reseñas
+    reseñas = ModeloReseña.objects.all()  
 
     return render(request, 'App/formulario-resena.html', {'form': form, 'reseñas': reseñas})
 
 from django.shortcuts import render, redirect
 from .forms import CompraForm
-
 def formulario_compra(request):
     if request.method == 'POST':
         form = CompraForm(request.POST)
@@ -74,7 +72,6 @@ def formulario_compra(request):
             return redirect('inicio')  # Redirige al inicio o a la página que desees
     else:
         form = CompraForm()
-
     return render(request, 'App/formulario-compra.html', {'form': form})
 
 from django.shortcuts import render, redirect
@@ -91,3 +88,25 @@ def formulario_producto_fuera_stock(request):
         form = SolicitudProductoForm()
 
     return render(request, 'App/formulario-prodsinstock.html', {'form': form})
+
+from django.shortcuts import render
+from .models import ModeloCliente
+from .forms import BusquedaClienteForm
+
+def buscar_cliente(request):
+    form = BusquedaClienteForm(request.GET)
+    clientes = ModeloCliente.objects.all()
+
+    if form.is_valid():
+        nombre = form.cleaned_data.get('nombre')
+        apellido = form.cleaned_data.get('apellido')
+        email = form.cleaned_data.get('email')
+
+        if nombre:
+            clientes = clientes.filter(nombre__icontains=nombre)
+        if apellido:
+            clientes = clientes.filter(apellido__icontains=apellido)
+        if email:
+            clientes = clientes.filter(email__icontains=email)
+
+    return render(request, "App/buscar_cliente.html", {'form': form, 'clientes': clientes})

@@ -1,10 +1,7 @@
 {% extends "App/base.html" %}
 {% load static %}
-
 {% block main %}
-
     <h1>Formulario de Compra</h1>
-
     <form method="POST">
         {% csrf_token %}
         
@@ -16,7 +13,6 @@
                 <div class="errors">{{ form.producto.errors }}</div>
             {% endif %}
         </div>
-
         <!-- Campo Cantidad -->
         <div>
             <label for="{{ form.cantidad.id_for_label }}">Cantidad:</label>
@@ -25,7 +21,6 @@
                 <div class="errors">{{ form.cantidad.errors }}</div>
             {% endif %}
         </div>
-
         <!-- Campo Precio -->
         <div>
             <label for="{{ form.precio.id_for_label }}">Precio:</label>
@@ -34,7 +29,6 @@
                 <div class="errors">{{ form.precio.errors }}</div>
             {% endif %}
         </div>
-
         <!-- Campo Número de compra -->
         <div>
             <label for="{{ form.nro_compra.id_for_label }}">Número de compra:</label>
@@ -43,11 +37,8 @@
                 <div class="errors">{{ form.nro_compra.errors }}</div>
             {% endif %}
         </div>
-
         <button type="submit">Realizar Compra</button>
     </form>
-
     <br>
     <a href="{% url 'inicio' %}">Volver al inicio</a>
-
 {% endblock main %}

@@ -1,0 +1,22 @@
+{% extends "App/base.html" %}
+{% block main %}
+    <h1>Buscar Clientes</h1>
+
+    <form method="GET" action="{% url 'buscar_cliente' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Buscar</button>
+    </form>
+
+    <h2>Resultados</h2>
+    <div class="clientes-lista">
+        {% for cliente in clientes %}
+            <div class="cliente">
+                <p><strong>Nombre:</strong> {{ cliente.nombre }} {{ cliente.apellido }}</p>
+                <p><strong>Email:</strong> {{ cliente.email }}</p>
+            </div>
+        {% empty %}
+            <p>No se encontraron clientes.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

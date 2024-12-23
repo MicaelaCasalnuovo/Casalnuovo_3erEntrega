@@ -15,15 +15,15 @@ from .models import ModeloCliente, ModeloProducto
 class ReseñaForm(forms.ModelForm):
     class Meta:
         model = ModeloReseña
-        fields = ['cliente', 'producto', 'comentario']  # Campos del formulario
+        fields = ['cliente', 'producto', 'comentario']  
 
         widgets = {
-            'comentario': forms.Textarea(attrs={'rows': 4, 'cols': 40}),  # Personalizando el widget para el comentario
+            'comentario': forms.Textarea(attrs={'rows': 4, 'cols': 40}), 
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Opcional: puedes limitar los clientes y productos disponibles en los formularios si es necesario
+      
         self.fields['cliente'].queryset = ModeloCliente.objects.all()
         self.fields['producto'].queryset = ModeloProducto.objects.all()
 
@@ -39,7 +39,7 @@ class CompraForm(forms.ModelForm):
         widgets = {
             'precio': forms.NumberInput(attrs={'step': '0.01'}),  # Para asegurar que el precio tenga decimales
         }
-
+        
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['producto'].queryset = ModeloProducto.objects.all() 
@@ -50,8 +50,13 @@ from .models import SolicitudProductoFueraStock
 class SolicitudProductoForm(forms.ModelForm):
     class Meta:
         model = SolicitudProductoFueraStock
-        fields = ['producto', 'descripcion', 'cliente']  # Campos que se van a mostrar en el formulario
+        fields = ['producto', 'descripcion', 'cliente'] 
 
         widgets = {
-            'descripcion': forms.Textarea(attrs={'rows': 4, 'cols': 40}),  # Personalizando el widget para la descripción
+            'descripcion': forms.Textarea(attrs={'rows': 4, 'cols': 40}),  
         }
+
+class BusquedaClienteForm(forms.Form):
+    nombre = forms.CharField(max_length=100, required=False, label="Nombre del Cliente")
+    apellido = forms.CharField(max_length=100, required=False, label="Apellido del Cliente")
+    email = forms.EmailField(required=False, label="Correo Electrónico")
