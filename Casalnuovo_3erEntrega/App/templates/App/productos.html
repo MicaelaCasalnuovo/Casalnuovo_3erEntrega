@@ -1,6 +1,6 @@
 {% extends "App/base.html" %}
-{% load static  %}
-{% block main  %}
+{% load static %}
+{% block main %}
 <section id="productos" class="menu-cart scroll-reveal">
     <div class="container">
         <h1 class="header-txt">Productos</h1>
@@ -177,4 +177,10 @@
         </div>
     </div>
 </section>
-{% endblock main  %}
+
+<!-- Botón para redirigir al formulario de productos fuera de stock -->
+<a href="{% url 'formulario_prodsinstock' %}" class="btn btn-secondary">
+    ¿No encontraste lo que querías? Déjanos lo que necesitas y nos pondremos en contacto con vos.
+</a>
+
+{% endblock main %}

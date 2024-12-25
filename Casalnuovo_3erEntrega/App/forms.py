@@ -39,7 +39,6 @@ class CompraForm(forms.ModelForm):
         widgets = {
             'precio': forms.NumberInput(attrs={'step': '0.01'}),  # Para asegurar que el precio tenga decimales
         }
-        
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['producto'].queryset = ModeloProducto.objects.all() 

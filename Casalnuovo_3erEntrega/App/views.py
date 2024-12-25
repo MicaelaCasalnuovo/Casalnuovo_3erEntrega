@@ -18,7 +18,8 @@ def compra(request):
     return render(request, "App/compra.html")
 
 def resenas(request):
-    return render(request, "App/resenas.html")
+    reseñas = ModeloReseña.objects.all()
+    return render(request, 'App/resenas.html', {'reseñas': reseñas})
     
 
 
@@ -44,9 +45,6 @@ from django.shortcuts import render, redirect
 from .forms import ReseñaForm
 from .models import ModeloReseña
 
-from django.shortcuts import render, redirect
-from .forms import ReseñaForm
-from .models import ModeloReseña
 
 def formulario_resena(request):
     if request.method == 'POST':

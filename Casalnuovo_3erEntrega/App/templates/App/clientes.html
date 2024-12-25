@@ -2,21 +2,17 @@
 {% load static %}
 {% block main %}
 
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bienvenida</title>
-</head>
-<body>
-  <section id="bienvenida" class="bienvenida-section">
-    <div class="container">
-      <h2 class="header-txt">¡Bienvenido! Estamos felices de que vuelvas a elegirnos.</h2>
-      <p class="bienvenida-text">Tu apoyo y preferencia significan mucho para nosotros. Nos llena de alegría saber que elegiste nuevamente nuestro servicio. Queremos que disfrutes cada momento con nosotros y que tu experiencia sea siempre memorable.</p>
-      <p class="bienvenida-text">Gracias por confiar en nosotros. ¡Estamos aquí para brindarte lo mejor!</p>
-    </div>
-  </section>
-</body>
-</html>
+<section id="bienvenida" class="bienvenida-section">
+  <div class="container">
+    <h2 class="header-txt">¡Bienvenido! Estamos felices de que vuelvas a elegirnos.</h2>
+    <p class="bienvenida-text">Tu apoyo y preferencia significan mucho para nosotros. Nos llena de alegría saber que elegiste nuevamente nuestro servicio. Queremos que disfrutes cada momento con nosotros y que tu experiencia sea siempre memorable.</p>
+    <p class="bienvenida-text">Gracias por confiar en nosotros. ¡Estamos aquí para brindarte lo mejor!</p>
+  </div>
+
+  <!-- Botón para redirigir al formulario de reseñas -->
+  <div class="add-review-btn">
+    <a href="{% url 'formulario_cliente' %}" class="btn">registrarse como cliente</a>
+  </div>
+</section>
 
 {% endblock main %}
