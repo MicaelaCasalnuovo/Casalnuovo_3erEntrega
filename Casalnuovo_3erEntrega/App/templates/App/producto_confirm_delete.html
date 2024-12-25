@@ -1,0 +1,15 @@
+{% extends "App/base.html" %}
+
+{% block main %}
+<section id="eliminar-producto">
+    <div class="container">
+        <h1>¿Estás seguro de que deseas eliminar el producto?</h1>
+        <p>{{ producto.descripcion }} (SKU: {{ producto.sku }})</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Eliminar</button>
+        </form>
+        <a href="{% url 'productos' %}">Cancelar</a>
+    </div>
+</section>
+{% endblock %}

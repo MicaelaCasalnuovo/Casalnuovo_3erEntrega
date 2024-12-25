@@ -1,0 +1,14 @@
+{% extends "App/base.html" %}
+
+{% block main %}
+<section id="actualizar-producto">
+    <div class="container">
+        <h1>Actualizar Producto</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Actualizar</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

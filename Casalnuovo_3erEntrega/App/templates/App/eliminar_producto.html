@@ -1,0 +1,27 @@
+{% extends "App/base.html" %}
+{% load static %}
+
+{% block main %}
+<section id="eliminar_producto" class="menu-cart scroll-reveal">
+    <div class="container">
+        <h1 class="header-txt">¿Estás seguro de eliminar el producto?</h1>
+        <div class="divider"></div>
+
+        <div class="menu-content">
+            <div class="menu-section">
+                <h2>Producto: {{ producto.descripcion }}</h2>
+                <p><strong>SKU:</strong> {{ producto.sku }}</p>
+                <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+                <p><strong>Stock:</strong> {{ producto.stock }}</p>
+
+                <!-- Formulario de confirmación para eliminar -->
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Eliminar Producto</button>
+                    <a href="{% url 'productos' %}" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

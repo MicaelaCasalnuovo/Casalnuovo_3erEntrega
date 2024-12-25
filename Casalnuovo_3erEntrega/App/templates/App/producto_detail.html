@@ -1,0 +1,28 @@
+{% extends "App/base.html" %}
+
+{% block main %}
+<section id="producto-detalle" class="producto-detail-section">
+    <div class="container">
+        <h1 class="header-txt">{{ producto.descripcion }}</h1>
+        <div class="divider"></div>
+
+        <div class="producto-detail">
+            <p><strong>SKU:</strong> {{ producto.sku }}</p>
+            <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+            <p><strong>Stock:</strong> {{ producto.stock }}</p>
+        </div>
+
+        <div class="acciones">
+            <!-- Botón para actualizar producto -->
+            <a href="{% url 'producto_update' sku=producto.sku %}" class="btn btn-secondary">
+                Actualizar Producto
+            </a>
+
+            <!-- Botón para volver a la lista de productos -->
+            <a href="{% url 'productos' %}" class="btn btn-primary">
+                Volver a la lista de productos
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

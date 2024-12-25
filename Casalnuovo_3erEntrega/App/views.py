@@ -12,7 +12,10 @@ def clientes(request):
     return render(request, "App/clientes.html")
 
 def productos(request):
-    return render(request, "App/productos.html")
+    # Obtener todos los productos desde la base de datos
+    productos = ModeloProducto.objects.all()
+    
+    return render(request, 'App/productos.html', {'productos': productos})
 
 def compra(request):
     return render(request, "App/compra.html")
@@ -176,3 +179,56 @@ def actualizar_producto(request, sku):
         form = ModeloProductoForm(instance=producto)  # Cargamos el formulario con los datos actuales del producto
 
     return render(request, 'App/actualizar_producto.html', {'form': form, 'producto': producto})
+
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import ModeloProducto
+
+def eliminar_producto(request, sku):
+    # Buscar el producto por el SKU
+    producto = get_object_or_404(ModeloProducto, sku=sku)
+    
+    if request.method == 'POST':
+        # Eliminar el producto
+        producto.delete()
+        # Redirigir a la lista de productos
+        return redirect('productos')  
+
+    return render(request, 'App/eliminar_producto.html', {'producto': producto})
+
+from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from .models import ModeloProducto
+from .forms import ModeloProductoForm 
+# Vista para listar productos
+class ProductoListView(ListView):
+    model = ModeloProducto
+    template_name = 'App/productos.html'  
+    context_object_name = 'productos' 
+
+class ProductoDetailView(DetailView):
+    model = ModeloProducto
+    template_name = 'App/producto_detail.html'
+    context_object_name = 'producto'
+
+    def get_object(self):
+        # Aquí estamos utilizando el SKU en lugar del pk
+        return get_object_or_404(ModeloProducto, sku=self.kwargs['sku'])
+
+# Vista para actualizar un producto
+class ProductoUpdateView(UpdateView):
+    model = ModeloProducto
+    form_class = ModeloProductoForm  # Si tienes un formulario para actualizar el producto
+    template_name = 'App/producto_form.html'  # Asegúrate de tener un template para esta vista
+    context_object_name = 'producto'
+
+    def get_success_url(self):
+        # Redirige a la lista de productos después de actualizar
+        return reverse_lazy('producto')
+    
+    # Vista para eliminar un producto
+class ProductoDeleteView(DeleteView):
+    model = ModeloProducto
+    template_name = 'App/producto_confirm_delete.html'  # Asegúrate de tener un template para esta vista
+    context_object_name = 'producto'
+    success_url = reverse_lazy('producto')  # Redirige a la lista de productos después de eliminar
