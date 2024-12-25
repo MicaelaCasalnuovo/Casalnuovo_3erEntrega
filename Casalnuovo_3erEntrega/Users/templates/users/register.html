@@ -1,0 +1,24 @@
+{% extends "App/base.html" %}
+{% load static %}
+
+{% block title %} Register {% endblock title %}
+
+{% block main %}
+<div class="d-flex justify-content-center">
+    <div class="d-flex flex-column">
+        <h3 class="text-center mb-4">Registrar nuevo usuario</h3>
+        
+        {% if mensaje %}
+        <div class="alert alert-danger">{{ mensaje }}</div>
+        {% endif %}
+        
+        <form action="" method="POST">  <!-- formulario POST -->
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Mostrar el formulario -->
+            <input type="submit" value="Registrar" class="btn btn-primary">
+        </form>
+        
+        <p class="mt-3 text-center">¿Ya tienes una cuenta? <a href="{% url 'Login' %}">Iniciar sesión</a></p>  <!-- Enlace al login -->
+    </div>
+</div>
+{% endblock main %}
