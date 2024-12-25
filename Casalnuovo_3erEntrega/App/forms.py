@@ -29,7 +29,6 @@ class ReseñaForm(forms.ModelForm):
 
 from django import forms
 from .models import ModeloCompra
-from .models import ModeloProducto
 
 class CompraForm(forms.ModelForm):
     class Meta:
@@ -39,10 +38,19 @@ class CompraForm(forms.ModelForm):
         widgets = {
             'precio': forms.NumberInput(attrs={'step': '0.01'}),  # Para asegurar que el precio tenga decimales
         }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['producto'].queryset = ModeloProducto.objects.all() 
+        self.fields['producto'].queryset = ModeloProducto.objects.all()
 
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.usuario = self.initial.get('usuario')  # Asocia el usuario con la compra
+        if commit:
+            instance.save()
+        return instance
+    
+    
 from django import forms
 from .models import SolicitudProductoFueraStock
 

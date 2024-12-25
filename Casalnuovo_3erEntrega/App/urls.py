@@ -23,6 +23,7 @@ forms_api = [
     path('producto/<str:sku>/', views.ProductoDetailView.as_view(), name='producto_detail'),
     path('producto/actualizar/<str:sku>/', views.ProductoUpdateView.as_view(), name='producto_update'),
     path('producto/eliminar/<str:sku>/', views.ProductoDeleteView.as_view(), name='producto_delete'),
+    path('bienvenido/', views.bienvenido, name='bienvenido'),
 
 ]
     

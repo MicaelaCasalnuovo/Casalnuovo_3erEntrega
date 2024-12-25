@@ -22,33 +22,39 @@
                             <!-- Cabecera de la tabla -->
                             <tr>
                                 <th>Descripción</th>
-                                <th>SKU</th>
-                                <th>Precio</th>
-                                <th>Stock</th>
-                                <th>Acciones</th>
+                                {% if user.is_authenticated %}
+                                    <th>SKU</th>
+                                    <th>Precio</th>
+                                    <th>Stock</th>
+                                    <th>Acciones</th>
+                                {% endif %}
                             </tr>
+
                             {% for producto in productos %}
                             <tr>
                                 <td>{{ producto.descripcion }}</td>
-                                <td>{{ producto.sku }}</td>
-                                <td>${{ producto.precio }}</td>
-                                <td>{{ producto.stock }}</td>
-                                <td>
-                                    <div style="display: flex; justify-content: space-between; gap: 10px;">
-                                        <!-- Botón para ver detalles -->
-                                        <a href="{% url 'producto_detail' sku=producto.sku %}" class="btn btn-info" title="Ver Detalles">
-                                            Ver Detalles
-                                        </a>
-                                        <!-- Botón para actualizar -->
-                                        <a href="{% url 'producto_update' sku=producto.sku %}" class="btn btn-secondary" title="Actualizar Producto">
-                                            Actualizar Producto
-                                        </a>
-                                        <!-- Botón para eliminar -->
-                                        <a href="{% url 'producto_delete' sku=producto.sku %}" class="btn btn-danger" title="Eliminar Producto">
-                                            Eliminar Producto
-                                        </a>
-                                    </div>
-                                </td>
+
+                                {% if user.is_authenticated %}
+                                    <td>{{ producto.sku }}</td>
+                                    <td>${{ producto.precio }}</td>
+                                    <td>{{ producto.stock }}</td>
+                                    <td>
+                                        <div style="display: flex; justify-content: space-between; gap: 10px;">
+                                            <!-- Botón para ver detalles -->
+                                            <a href="{% url 'producto_detail' sku=producto.sku %}" class="btn btn-info" title="Ver Detalles">
+                                                Ver Detalles
+                                            </a>
+                                            <!-- Botón para actualizar -->
+                                            <a href="{% url 'producto_update' sku=producto.sku %}" class="btn btn-secondary" title="Actualizar Producto">
+                                                Actualizar Producto
+                                            </a>
+                                            <!-- Botón para eliminar -->
+                                            <a href="{% url 'producto_delete' sku=producto.sku %}" class="btn btn-danger" title="Eliminar Producto">
+                                                Eliminar Producto
+                                            </a>
+                                        </div>
+                                    </td>
+                                {% endif %}
                             </tr>
                             {% empty %}
                             <tr>
@@ -69,3 +75,4 @@
 </a>
 
 {% endblock %}
+

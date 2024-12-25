@@ -21,7 +21,7 @@
         <h3>Tus compras anteriores:</h3>
         <ul>
           {% for compra in compras %}
-            <li>{{ compra.producto }} - {{ compra.fecha_compra }}</li>
+            <li>{{ compra.producto.descripcion }} - {{ compra.cantidad }} - ${{ compra.precio }} - {{ compra.nro_compra }} - {{ compra.fecha_compra }}</li>
           {% endfor %}
         </ul>
       {% else %}

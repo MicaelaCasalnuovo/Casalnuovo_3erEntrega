@@ -20,16 +20,19 @@ class ModeloProducto(models.Model):
 
     def __str__(self):
         return self.descripcion
-
-# Modelo Compra
+from django.contrib.auth.models import User
 class ModeloCompra(models.Model):
-    producto = models.ForeignKey(ModeloProducto, on_delete=models.CASCADE)  # Relación con Producto
-    cantidad = models.PositiveIntegerField()  # Cantidad de productos comprados
-    precio = models.DecimalField(max_digits=10, decimal_places=2)  # Precio total de la compra
-    nro_compra = models.CharField(max_length=20, unique=True)  # Número de compra único
+    producto = models.ForeignKey('ModeloProducto', on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField()
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    nro_compra = models.CharField(max_length=20, unique=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)  # Cambiado a null=True temporalmente
 
     def __str__(self):
-        return f"Compra {self.nro_compra} - {self.producto.descripcion}"
+        return f"Compra {self.nro_compra} - {self.producto.descripcion} - {self.usuario.username if self.usuario else 'N/A'}"
+
+    def __str__(self):
+        return f"Compra {self.nro_compra} - {self.producto.descripcion} - {self.usuario.username}"
 
 # Modelo Reseña
 class ModeloReseña(models.Model):

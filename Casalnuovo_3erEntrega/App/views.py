@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 def inicio(request):
     return render(request, "App/inicio.html")
@@ -17,6 +18,7 @@ def productos(request):
     
     return render(request, 'App/productos.html', {'productos': productos})
 
+@login_required
 def compra(request):
     return render(request, "App/compra.html")
 
@@ -65,16 +67,21 @@ def formulario_resena(request):
 
 from django.shortcuts import render, redirect
 from .forms import CompraForm
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def formulario_compra(request):
     if request.method == 'POST':
         form = CompraForm(request.POST)
         if form.is_valid():
-            form.save()  # Guarda la compra en la base de datos
-            return redirect('inicio')  # Redirige al inicio o a la página que desees
+            compra = form.save(commit=False)
+            compra.usuario = request.user  # Asocia la compra con el usuario logueado
+            compra.save()
+            return redirect('bienvenido')  # Redirige a la página de compras del usuario
     else:
         form = CompraForm()
-    return render(request, 'App/formulario-compra.html', {'form': form})
 
+    return render(request, 'App/formulario-compra.html', {'form': form})
 from django.shortcuts import render, redirect
 from .forms import SolicitudProductoForm
 from .models import SolicitudProductoFueraStock
@@ -232,3 +239,15 @@ class ProductoDeleteView(DeleteView):
     template_name = 'App/producto_confirm_delete.html'  # Asegúrate de tener un template para esta vista
     context_object_name = 'producto'
     success_url = reverse_lazy('producto')  # Redirige a la lista de productos después de eliminar
+
+# views.py
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import ModeloCompra
+
+@login_required
+def bienvenido(request):
+    # Obtener las compras del usuario logueado
+    compras = ModeloCompra.objects.filter(usuario=request.user)
+
+    return render(request, 'App/bienvenido.html', {'compras': compras})
