@@ -3,7 +3,7 @@ from django.urls import path
 from App import views
 
 urlpatterns = [
-    path('Inicio/', views.inicio, name='inicio'),
+    path('inicio/', views.inicio, name='inicio'),
     path('clientes/', views.clientes, name='clientes'),
     path('productos/', views.productos, name='productos'),
     path('compra/', views.compra, name='compra'),
@@ -15,7 +15,11 @@ forms_api = [
     path('formulario-compra/', views.formulario_compra, name='formulario_compra'),
     path('formulario-prodsinstock/', views.formulario_producto_fuera_stock, name='formulario_prodsinstock'),
     path('buscar-cliente/', views.buscar_cliente, name='buscar_cliente'),
+    path('buscar-producto/', views.buscar_producto, name='buscar_producto'),
+    path('actualizar-cliente/<str:cliente_dni>/', views.actualizar_cliente, name='actualizar_cliente'),
+     path('actualizar-producto/<str:sku>/', views.actualizar_producto, name='actualizar_producto'),
 ]
+    
 
 # Añadiendo las rutas de los formularios al URL
 urlpatterns += forms_api

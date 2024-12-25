@@ -59,3 +59,19 @@ class BusquedaClienteForm(forms.Form):
     nombre = forms.CharField(max_length=100, required=False, label="Nombre del Cliente")
     apellido = forms.CharField(max_length=100, required=False, label="Apellido del Cliente")
     email = forms.EmailField(required=False, label="Correo Electrónico")
+
+from django import forms
+
+class BusquedaProductoForm(forms.Form):
+    descripcion = forms.CharField(max_length=100, required=False, label="Descripción del Producto")
+    sku = forms.CharField(max_length=50, required=False, label="SKU del Producto")
+    precio_min = forms.DecimalField(max_digits=10, decimal_places=2, required=False, label="Precio Mínimo")
+    precio_max = forms.DecimalField(max_digits=10, decimal_places=2, required=False, label="Precio Máximo")
+
+from django import forms
+from .models import ModeloProducto
+
+class ModeloProductoForm(forms.ModelForm):
+    class Meta:
+        model = ModeloProducto
+        fields = ['sku', 'descripcion', 'stock', 'precio']

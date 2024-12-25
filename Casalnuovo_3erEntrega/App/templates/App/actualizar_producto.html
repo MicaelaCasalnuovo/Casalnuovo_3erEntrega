@@ -1,0 +1,12 @@
+<!-- actualizar_producto.html -->
+{% extends "App/base.html" %}
+{% block main %}
+    <div class="container">
+        <h1>Actualizar Producto: {{ producto.descripcion }}</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Actualizar Producto</button>
+        </form>
+    </div>
+{% endblock %}
