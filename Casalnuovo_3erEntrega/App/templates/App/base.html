@@ -29,9 +29,20 @@
                                     <li><a class="m-anim" href="{% url 'productos' %}" data-text="Productos">Productos</a></li>
                                     <li><a class="m-anim" href="{% url 'compra' %}" data-text="Compras">Compras</a></li>
                                     <li><a class="m-anim" href="{% url 'resenas' %}" data-text="Reseñas">Reseñas</a></li>
-                                    <li><a class="m-anim" href="{% url 'Login' %}" data-text="Login">Iniciar sesión</a></li> 
-                                    <li><a class="m-anim" href="{% url 'Logout' %}" data-text="Logout">Cerrar sesión</a></li>  
-                            </ul>
+        
+                                    {% if user.is_authenticated %}
+                                        <!-- Si el usuario está logueado, muestra su nombre con un submenú para las opciones -->
+                                        <li class="user-menu">
+                                            <a class="m-anim" href="#" data-text="Usuario">{{ user.username }}</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="{% url 'cambiar_email_y_contrasena' %}" data-text="Editar Perfil">Editar Perfil</a></li>
+                                                <li><a href="{% url 'Logout' %}" data-text="Logout">Cerrar sesión</a></li>
+                                            </ul>
+                                        </li>
+                                    {% else %}
+                                        <li><a class="m-anim" href="{% url 'Login' %}" data-text="Login">Iniciar sesión</a></li>
+                                    {% endif %}
+                                </ul>
                         </nav>
                     </div>
                 </div>

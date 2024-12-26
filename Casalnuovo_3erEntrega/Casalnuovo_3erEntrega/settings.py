@@ -57,9 +57,7 @@ ROOT_URLCONF = 'Casalnuovo_3erEntrega.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR / 'templates',  # Si tienes una carpeta global "templates" en la raíz del proyecto
-        ],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
