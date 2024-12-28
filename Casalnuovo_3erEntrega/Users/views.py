@@ -67,37 +67,46 @@ from django.shortcuts import render
 def gracias_por_visitar(request):
     return render(request, "users/gracias_por_visitar.html")
 
-# views.py
+# users/views.py
+# users/views.py
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserChangeForm
-from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
-from django.contrib.auth.models import User
+from django.contrib.auth import update_session_auth_hash
+from .forms import CambiarEmailYContrasenaForm
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def cambiar_email_y_contrasena(request):
     if request.method == 'POST':
+        form = CambiarEmailYContrasenaForm(request.POST, request.FILES, instance=request.user)
         
-        email = request.POST.get('email')
-        old_password = request.POST.get('old_password')
-        new_password = request.POST.get('new_password')
+        if form.is_valid():
+            # Verificamos si la contraseña actual es correcta
+            old_password = form.cleaned_data['old_password']
+            new_password = form.cleaned_data['new_password']
 
-        # Validar usuario
-        user = request.user
-        if user.check_password(old_password):
-            # Cambiar correo
-            if email != user.email:
-                user.email = email
+            # Verificar si la contraseña actual es correcta
+            if request.user.check_password(old_password):
+                # Cambiar contraseña si es necesario
+                if new_password:
+                    request.user.set_password(new_password)
+                    update_session_auth_hash(request, request.user)  # Mantener la sesión activa
 
-            # Cambiar contraseña
-            if new_password:
-                user.set_password(new_password)
-                update_session_auth_hash(request, user)  
+                # Guardar los cambios de email
+                form.save()  # Esto guarda los cambios realizados en el formulario (por ejemplo, el email)
 
-            user.save()  # Guardar los cambios
-            messages.success(request, 'Correo y/o contraseña cambiados exitosamente.')
-            return redirect('perfil')  
-        else:
-            messages.error(request, 'Contraseña actual incorrecta.')
-    
-    return render(request, 'users/cambiar_email_y_contrasena.html')
+                # Si se subió una nueva imagen de avatar
+                if 'imagen' in request.FILES:
+                    avatar, created = Avatar.objects.get_or_create(user=request.user)  # Obtiene o crea un avatar para el usuario
+                    avatar.imagen = request.FILES['imagen']
+                    avatar.save()
 
+                messages.success(request, 'Correo y/o contraseña cambiados exitosamente.')
+                return redirect('perfil')  # Redirige a la página que desees (perfil del usuario, etc.)
+            else:
+                messages.error(request, 'La contraseña actual es incorrecta.')
+
+    else:
+        form = CambiarEmailYContrasenaForm(initial={'email': request.user.email})
+
+    return render(request, 'users/cambiar_email_y_contrasena.html', {'form': form})
