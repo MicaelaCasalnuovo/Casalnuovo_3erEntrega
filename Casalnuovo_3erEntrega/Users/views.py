@@ -110,3 +110,70 @@ def cambiar_email_y_contrasena(request):
         form = CambiarEmailYContrasenaForm(initial={'email': request.user.email})
 
     return render(request, 'users/cambiar_email_y_contrasena.html', {'form': form})
+
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from App.models import ModeloCliente
+
+
+@login_required
+def eliminar_cliente(request, id):
+    cliente = get_object_or_404(ModeloCliente, id=id)
+    
+    # Verificar que el cliente se recuperó correctamente
+    print(f"Intentando eliminar el cliente con ID {id}")
+    
+    cliente.delete()
+    
+    # Confirmación después de la eliminación
+    print(f"Cliente con ID {id} eliminado.")
+    
+    return redirect('buscar_cliente')
+
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from App.models import ModeloCompra
+
+@login_required
+def eliminar_compra(request, id):
+    # Verificar si el usuario es administrador
+    if not request.user.is_staff:
+        return redirect('bienvenido')  # O una página de error, si no es admin
+    
+    # Buscar la compra
+    compra = get_object_or_404(ModeloCompra, id=id)
+    
+    # Eliminar la compra
+    compra.delete()
+
+    # Redirigir después de la eliminación
+    return redirect('bienvenido')  # Redirige a la página de bienvenida o la que prefieras
+
+# views.py
+
+
+from django.http import Http404
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect
+from App.models import ModeloProducto
+
+# Vista para eliminar el producto solo si es admin
+@login_required
+def eliminar_producto(request, sku):
+    # Obtener el producto por su SKU o lanzar error 404 si no existe
+    producto = get_object_or_404(ModeloProducto, sku=sku)
+
+    # Verificar si el usuario es admin
+    if not request.user.is_staff:
+        raise Http404("No tienes permisos para eliminar este producto.")  # Lanza un 404 si no es admin
+
+    # Si el usuario es admin, proceder a eliminar
+    producto.delete()
+
+    # Redirigir a la página de bienvenida después de la eliminación
+    return redirect('bienvenido')
+
+
+
+
+
