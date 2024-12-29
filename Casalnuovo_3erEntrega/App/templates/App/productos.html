@@ -23,42 +23,42 @@
                             <tr>
                                 <th>Descripción</th>
                                 {% if user.is_authenticated %}
-                                    <th>SKU</th>
-                                    <th>Precio</th>
-                                    <th>Stock</th>
+                                    <!-- Solo mostrar si el usuario está logueado -->
                                     <th>Acciones</th>
                                 {% endif %}
                             </tr>
 
                             {% for producto in productos %}
                             <tr>
+                                <!-- Solo mostramos la descripción -->
                                 <td>{{ producto.descripcion }}</td>
 
                                 {% if user.is_authenticated %}
-                                    <td>{{ producto.sku }}</td>
-                                    <td>${{ producto.precio }}</td>
-                                    <td>{{ producto.stock }}</td>
                                     <td>
                                         <div style="display: flex; justify-content: space-between; gap: 10px;">
                                             <!-- Botón para ver detalles -->
                                             <a href="{% url 'producto_detail' sku=producto.sku %}" class="btn btn-info" title="Ver Detalles">
                                                 Ver Detalles
                                             </a>
-                                            <!-- Botón para actualizar -->
-                                            <a href="{% url 'producto_update' sku=producto.sku %}" class="btn btn-secondary" title="Actualizar Producto">
-                                                Actualizar Producto
-                                            </a>
-                                            <!-- Botón para eliminar -->
-                                            <a href="{% url 'producto_delete' sku=producto.sku %}" class="btn btn-danger" title="Eliminar Producto">
-                                                Eliminar Producto
-                                            </a>
+
+                                            {% if user.is_staff %}
+                                                <!-- Botón para actualizar producto (solo visible si es admin) -->
+                                                <a href="{% url 'producto_update' sku=producto.sku %}" class="btn btn-secondary" title="Actualizar Producto">
+                                                    Actualizar Producto
+                                                </a>
+
+                                                <!-- Botón para eliminar producto (solo visible si es admin) -->
+                                                <a href="{% url 'producto_delete' sku=producto.sku %}" class="btn btn-danger" title="Eliminar Producto">
+                                                    Eliminar Producto
+                                                </a>
+                                            {% endif %}
                                         </div>
                                     </td>
                                 {% endif %}
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="5">No hay productos disponibles.</td>
+                                <td colspan="2">No hay productos disponibles.</td>
                             </tr>
                             {% endfor %}
                         </table>
@@ -69,10 +69,15 @@
     </div>
 </section>
 
+<!-- Imagen que aparece al finalizar la lista de productos -->
+<div class="productos-final-image" style="text-align: center; margin-top: 40px;">
+    <h3>10 años en la mesa de los argentinos</h3>
+    <img src="https://i.ibb.co/7NFLYNc/veggie.png" alt="10 años en la mesa de los argentinos" style="max-width: 200px; margin-top: 20px;">
+</div>
+
 <!-- Botón para redirigir al formulario de productos fuera de stock -->
 <a href="{% url 'formulario_prodsinstock' %}" class="btn btn-secondary">
     ¿No encontraste lo que querías? Déjanos lo que necesitas y nos pondremos en contacto con vos.
 </a>
 
 {% endblock %}
-

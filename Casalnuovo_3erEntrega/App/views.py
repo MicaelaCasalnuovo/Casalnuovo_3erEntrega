@@ -169,11 +169,18 @@ def actualizar_cliente(request, cliente_dni):
 
     return render(request, 'App/actualizar_cliente.html', {'form': form, 'cliente': cliente})
 
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseForbidden
+from django.contrib.auth.decorators import login_required
 from .models import ModeloProducto
 from .forms import ModeloProductoForm
 
+@login_required  # Asegura que el usuario esté logueado
 def actualizar_producto(request, sku):
+    # Verifica si el usuario es administrador
+    if not request.user.is_staff:
+        return HttpResponseForbidden("No tienes permisos para actualizar productos.")
+    
     # Buscar el producto por el SKU
     producto = get_object_or_404(ModeloProducto, sku=sku)
     
@@ -181,24 +188,52 @@ def actualizar_producto(request, sku):
         form = ModeloProductoForm(request.POST, instance=producto)
         if form.is_valid():
             form.save()  # Guardamos los cambios realizados al producto
-            return redirect('productos')  # Redirigimos a la página de productos (ajusta según tu URL)
+            return redirect('productos')  # Redirigimos a la página de productos
     else:
         form = ModeloProductoForm(instance=producto)  # Cargamos el formulario con los datos actuales del producto
 
     return render(request, 'App/actualizar_producto.html', {'form': form, 'producto': producto})
 
+
+from django.contrib.auth.decorators import login_required
+from .models import ModeloProducto
+from .forms import ModeloProductoForm
+
+@login_required
+def actualizar_producto(request, sku):
+    # Verificar si el usuario es admin
+    if not request.user.is_staff:
+        return redirect('productos')  # Redirigir a la lista de productos si no es admin
+    
+    producto = get_object_or_404(ModeloProducto, sku=sku)
+
+    if request.method == 'POST':
+        form = ModeloProductoForm(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()  # Guardamos los cambios realizados al producto
+            return redirect('productos')  # Redirigimos a la página de productos
+    else:
+        form = ModeloProductoForm(instance=producto)  # Cargamos el formulario con los datos actuales del producto
+
+    return render(request, 'App/actualizar_producto.html', {'form': form, 'producto': producto})
+
+
+
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import ModeloProducto
 
+@login_required
 def eliminar_producto(request, sku):
-    # Buscar el producto por el SKU
+    # Verificar si el usuario es admin
+    if not request.user.is_staff:
+        return redirect('productos')  # Redirigir a la lista de productos si no es admin
+
     producto = get_object_or_404(ModeloProducto, sku=sku)
-    
+
     if request.method == 'POST':
-        # Eliminar el producto
-        producto.delete()
-        # Redirigir a la lista de productos
-        return redirect('productos')  
+        producto.delete()  # Eliminar el producto
+        return redirect('productos')  # Redirigir a la lista de productos después de eliminar
 
     return render(request, 'App/eliminar_producto.html', {'producto': producto})
 
@@ -225,20 +260,31 @@ class ProductoDetailView(DetailView):
 # Vista para actualizar un producto
 class ProductoUpdateView(UpdateView):
     model = ModeloProducto
-    form_class = ModeloProductoForm  # Si tienes un formulario para actualizar el producto
-    template_name = 'App/producto_form.html'  # Asegúrate de tener un template para esta vista
+    form_class = ModeloProductoForm
+    template_name = 'App/producto_form.html'
     context_object_name = 'producto'
 
+    def get_object(self, queryset=None):
+        # Aquí se usa `sku` para obtener el objeto del modelo
+        return ModeloProducto.objects.get(sku=self.kwargs['sku'])
+
     def get_success_url(self):
-        # Redirige a la lista de productos después de actualizar
-        return reverse_lazy('producto')
+        # Redirige a la lista de productos o a cualquier URL que desees después de actualizar
+        return reverse_lazy('productos')
     
     # Vista para eliminar un producto
 class ProductoDeleteView(DeleteView):
     model = ModeloProducto
-    template_name = 'App/producto_confirm_delete.html'  # Asegúrate de tener un template para esta vista
+    template_name = 'App/producto_confirm_delete.html'
     context_object_name = 'producto'
-    success_url = reverse_lazy('producto')  # Redirige a la lista de productos después de eliminar
+
+    def get_object(self, queryset=None):
+        # Usa `sku` en lugar de `pk` para obtener el objeto del modelo
+        return get_object_or_404(ModeloProducto, sku=self.kwargs['sku'])
+
+    def get_success_url(self):
+        # Redirige a la lista de productos después de eliminar
+        return reverse_lazy('producto')
 
 # views.py
 from django.shortcuts import render
@@ -251,3 +297,8 @@ def bienvenido(request):
     compras = ModeloCompra.objects.filter(usuario=request.user)
 
     return render(request, 'App/bienvenido.html', {'compras': compras})
+
+from django.shortcuts import render
+
+def about(request):
+    return render(request, 'App/about.html')  # Asegúrate de que la ruta sea correcta

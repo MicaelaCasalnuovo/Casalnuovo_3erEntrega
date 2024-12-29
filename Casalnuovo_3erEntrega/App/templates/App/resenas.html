@@ -9,12 +9,17 @@
         <p class="reviews-text">Si tienes alguna sugerencia o algo que quieras compartir con nosotros, no dudes en hacerlo. Nos encanta saber qué piensas y cómo podemos seguir mejorando.</p>
         <p class="reviews-text">¡Gracias por elegirnos y por formar parte de nuestra comunidad!</p>
 
+        <!-- Imagen antes de mostrar las reseñas existentes -->
+        <div class="reseñas-image" style="text-align: center; margin-top: 30px;">
+            <img src="https://i.ibb.co/tLd5tKW/RESE-AS.png" alt="Reseñas" style="max-width: 300px; margin-bottom: 20px;">
+        </div>
+
         <!-- Mostrar las reseñas existentes -->
         <div class="reviews-list">
             {% for reseña in reseñas %}
                 <div class="reseña">
                     <p><strong>Cliente:</strong> {{ reseña.cliente.nombre }}</p>
-                    <p><strong>Producto:</strong> {{ reseña.producto.nombre }}</p>
+                    <p><strong>Producto:</strong> {{ reseña.producto.descripcion }}</p>
                     <p><strong>Comentario:</strong> {{ reseña.comentario }}</p>
                     <hr>
                 </div>
@@ -30,4 +35,4 @@
     </div>
 </section>
 
-{% endblock main %} 
+{% endblock main %}

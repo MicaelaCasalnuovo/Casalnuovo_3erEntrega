@@ -13,10 +13,17 @@
         </div>
 
         <div class="acciones">
-            <!-- Botón para actualizar producto -->
-            <a href="{% url 'producto_update' sku=producto.sku %}" class="btn btn-secondary">
-                Actualizar Producto
-            </a>
+            <!-- Mostrar el botón de actualización solo si el usuario es administrador -->
+            {% if user.is_staff %}
+                <a href="{% url 'producto_update' sku=producto.sku %}" class="btn btn-secondary">
+                    Actualizar Producto
+                </a>
+
+                <!-- Botón para eliminar el producto, solo visible si el usuario es admin -->
+                <a href="{% url 'producto_delete' sku=producto.sku %}" class="btn btn-danger" title="Eliminar Producto">
+                    Eliminar Producto
+                </a>
+            {% endif %}
 
             <!-- Botón para volver a la lista de productos -->
             <a href="{% url 'productos' %}" class="btn btn-primary">
