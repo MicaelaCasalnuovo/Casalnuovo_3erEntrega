@@ -14,3 +14,5 @@ A su vez cuenta con la opcion de Login que permite editar el perfil y cerrar ses
 
 link de prueba: https://docs.google.com/spreadsheets/d/1W2khni0GluDpZ75iEL7yMdAqedpIHqpd/edit?usp=sharing&ouid=109583778180067848560&rtpof=true&sd=true
 
+video explicativo: https://www.loom.com/share/84dc9e5cd22e42b0bf54792e58fb531f?sid=a689f5dd-24cf-4c79-9a3d-4f7ca292af4d
+
