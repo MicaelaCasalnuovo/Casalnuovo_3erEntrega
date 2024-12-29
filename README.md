@@ -2,18 +2,15 @@
 PROYECTO FINAL
 
 El repositorio refleja lo aprendido durante las clases de python, la idea es hacer un desarroyo web django, que contiene herencia html, models, forms y  busqueda con forms, creacion de 2 Apps, donde en una se manejan los usuarios, creacion de login, logout y avatars.
-Para apreciar el trabajo realizado se debe ingresar al link:http://127.0.0.1:8000/App/Inicio/
-donde se vera un pantallaso general. Cuenta con 5 botones para navegar por distintos 
-url:
-seccion clientes: http://127.0.0.1:8000/App/clientes/ para cargar un cliente nuevo se debe ingresar a: http://127.0.0.1:8000/App/formulario-cliente/
-
-seccion productos: http://127.0.0.1:8000/App/productos/, y a su vez lo complemente con un forms para que aquellos que deseen consumir algo que no esta en el menú lo dejen informado para analizar posibles productos nuevos: http://127.0.0.1:8000/App/formulario-prodsinstock/
-
-seccion reseñas: http://127.0.0.1:8000/App/resenas/ y para dejar una opinion se debe ingresar a: http://127.0.0.1:8000/App/formulario-resena/
-
-seccion compras: http://127.0.0.1:8000/App/compra/ y para efectuar una compra se debe ingresar a http://127.0.0.1:8000/App/formulario-compra/
-
-A su vez se genero un buscardor de clientes: http://127.0.0.1:8000/App/buscar-cliente/
+Para apreciar el trabajo realizado se debe ingresar al link: http://127.0.0.1:8000/Users/inicio/
+boton de about: http://127.0.0.1:8000/Users/about/
+Cuenta con distintos botones para navegar tales como, clientes: http://127.0.0.1:8000/App/clientes/ y para registarse como cliente: http://127.0.0.1:8000/Users/formulario-cliente/
+boton de productos: donde segun el usuario vera distintos ninveles de informacion: http://127.0.0.1:8000/Users/productos/
+de no conseguir el producto que necesitas podes darnos una sugerencia de lo que buscas: http://127.0.0.1:8000/Users/formulario-prodsinstock/
+contamos con un buscador de productos:http://127.0.0.1:8000/Users/buscar-producto/
+boton de compras: http://127.0.0.1:8000/Users/compra/ y formualrio para realizar una compra: http://127.0.0.1:8000/Users/formulario-compra/
+boton de reseñas: http://127.0.0.1:8000/Users/resenas/  y formulario para dejarnos tu experiencia: http://127.0.0.1:8000/Users/formulario-resena/
+A su vez cuenta con la opcion de Login que permite editar el perfil y cerrar sesión.
 
 link de prueba: https://docs.google.com/spreadsheets/d/1W2khni0GluDpZ75iEL7yMdAqedpIHqpd/edit?usp=sharing&ouid=109583778180067848560&rtpof=true&sd=true
 
